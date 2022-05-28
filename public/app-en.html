@@ -1,0 +1,259 @@
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Tiktok Printer</title>
+		<meta name="description" content="Tiktok Printer Guess Words Game">
+		<meta name="author" content="adierebel">
+		<link rel="stylesheet" href="https://mp.droidlit.com/trial/assets/css/reset.css?v=1.0">
+		<link rel="stylesheet" href="https://mp.droidlit.com/trial/assets/css/style.css?v=1.0">
+		<script type="text/javascript" src="assets/lang/en/database/words.js"></script>
+		<script type="text/javascript" src="assets/lang/en/database/msg.js"></script>
+		<script type="text/javascript" src="assets/tts/speakClient.js"></script>
+		<script type="text/javascript" src="assets/lang/en/js/jquery.js"></script>
+		<script type="text/javascript" src="assets/lang/en/js/socket.io.js"></script>
+		<script type="text/javascript" src="assets/lang/en/js/connection.js"></script>
+		<script type="text/javascript" src="assets/lang/en/js/app.js"></script>
+		<script type="text/javascript" src="assets/lang/en/js/confetti.js"></script>
+		<script type="text/javascript" src="assets/lang/en/js/start.js"></script>
+	</head>
+	<body>
+		<div class="main">
+			<div class="info">
+				<div class="text-bold">Live Chat</div>
+				<div class="mb-3 mt-2">
+					<input id="targetUsername" type="text" placeholder="Enter @username"/>
+					<button id="targetConnect">CONNECT</button>
+				</div>
+				<table class="mb-3" style="width:200px;">
+					<tr><td style="white-space:nowrap;">Game Size</td><td>&nbsp;:&nbsp;</td><td id="gameSize">&infin;</td></tr>
+					<tr><td style="white-space:nowrap;">Chat Status</td><td>&nbsp;:&nbsp;</td><td id="stateText">Not Connected</td></tr>
+				</table>
+				<div class="text-bold">Guess Game:</div>
+				<table class="mt-2 mb-2">
+					<tr><td>Next Word</td><td>&nbsp;:&nbsp;</td><td id="gameTimeout">&infin;</td></tr>
+					<tr><td>Remain Words</td><td>&nbsp;:&nbsp;</td><td id="gameWords">&infin;</td></tr>
+				</table>
+				<div>
+					<div id="textBawah" style="margin-top: 10px;">Word Duration:</div>
+					<input id="wordDur" type="number" placeholder="Word Skip Duration" value="60" min="10" />
+				</div>
+				<div class="mt-2 mb-3">
+					<button id="btnGameToggle" >START</button>
+					<button id="btnSkipWord" >SKIP WORD</button>
+				</div>
+				
+					<button id="btnFullscr">FULLSCREEN MODE</button>
+				
+				<div class="text-bold">Settings:</div>
+				<table class="mt-2 mb-3">
+					<tr><td><input id="confComment" type="checkbox" checked="true"/>&nbsp;&nbsp;</td><td><label for="confComment">Print Comment</label></td></tr>
+					<tr><td><input id="confGift" type="checkbox" checked="true"/>&nbsp;&nbsp;</td><td><label for="confGift">Print Gift</label></td></tr>
+					<tr><td><input id="confShare" type="checkbox" checked="true"/>&nbsp;&nbsp;</td><td><label for="confShare">Print Share &amp; Follow</label></td></tr>
+					<tr><td><input id="confLike" type="checkbox"/>&nbsp;&nbsp;</td><td><label for="confLike">Print Like</label></td></tr>
+					<tr><td><input id="confJoin" type="checkbox"/>&nbsp;&nbsp;</td><td><label for="confJoin">Print User Joined</label></td></tr>
+					<tr><td><input id="confBw" type="checkbox"/>&nbsp;&nbsp;</td><td><label for="confBw">Black &amp; White Paper</label></td></tr>
+					<tr><td><input id="confGlare" type="checkbox"/>&nbsp;&nbsp;</td><td><label for="confGlare">Enable Color Overlay</label></td></tr>
+					<tr><td><input id="confTTS" type="checkbox" checked="true"/>&nbsp;&nbsp;</td><td><label for="confTTS">Enable Text to Speech</label></td></tr>
+					<tr><td><input id="confNSFW" type="checkbox" checked="true"/>&nbsp;&nbsp;</td><td><label for="confTTS">Porn Filter</label></td></tr>
+				</table>
+				<div class="mb-3 mt-2">
+					<div class="text-tengah">Coins for Print Profile:</div>
+					<input id="confMinGift" type="number" placeholder="Min Gift = 1 coin" value="1" min="1" />
+					<button id="coinBtn">SET</button>
+					
+				</div>
+				<div class="mb-3 mt-2">
+					<div class="text-tengah">Coins for SP Print:</div>
+					<input id="confMinSPGift" type="number" placeholder="Min Gift = 5 coin" value="1" min="5" />
+					<button id="coinSpBtn">SET</button>
+				</div>
+				<div class="mb-3 mt-2">
+					<div class="text-tengah">Gift Duration</div>
+					<input id="giftDur" type="number" placeholder="Gift Duration" value="2" min="5" />
+					<button id="giftDurBtn">SET</button>
+				</div>
+				<div class="mb-3 mt-2">
+					<div class="text-tengah">SP Gift Duration</div>
+					<input id="spGiftDur" type="number" placeholder="SP Gift Duration" value="3" min="5" />
+					<button id="giftSpDurBtn">SET</button>
+				</div>
+				<div class="mb-3 mt-2">
+					<div class="text-tengah">Welcome Msg Interval</div>
+					<input id="welcomeDur" type="number" placeholder="Welcome Msg Interval" value="360" min="1" />
+					<button id="welcomeDurBtn">SET</button>
+				</div>
+				<div class="mb-3 mt-2">
+					<div class="text-tengah">Follow Msg Interval</div>
+					<input id="followDur" type="number" placeholder="Follow Msg Interval" value="240" min="1" />
+					<button id="followDurBtn">SET</button>
+					
+				</div>
+				<div class="mb-3 mt-2">
+					<div class="text-tengah">Vol Music Percentage</div>
+					<input id="volMusic" type="number" placeholder="Music Volume" value="100" min="0" max="100" />
+					<button id="musicPlayBtn">PLAY</button>
+					<button id="musicStopBtn">STOP</button>
+				</div>
+
+				<div class="mb-3 mt-2">
+					<div class="text-tengah">Background</div>
+					<button onClick="changevid('assets/media/bg1.mp4')" id="bgBtn">BG1</button>
+					<button onClick="changevid('assets/media/bg2.mp4')" id="bgBtn">BG2</button>
+					<button onClick="changevid('assets/media/bg3.mp4')" id="bgBtn">BG3</button>
+				</div>
+				
+				<div class="uiTextBwh">
+					<div class="text-bold" style="margin-bottom: 5px;">UI Text:</div>
+					<input id="confText0" type="text" style="width:240px;display:block;margin-top:2px;" value=""/>
+					<input id="confText1" type="text" style="width:240px;display:block;margin-top:2px;" value=""/>
+					<input id="confText2" type="text" style="width:240px;display:block;margin-top:2px;" value=""/>
+					<input id="confText3" type="text" style="width:240px;display:block;margin-top:2px;" value=""/>
+				</div>
+				<div class="saveReset">
+					<button id="btnSaveUI">✔ SAVE</button>
+					<button id="btnResetSetting">✖ RESET</button>
+				</div>
+				<div class="text-bold">NEXT FEATURES:</div>
+					<div class="addBtn">
+						<button onClick="changevid('https://mp.droidlit.com/trial/assets/media/3.mkv')">Video</button>
+						<button id="tapBtn" >TapTap</button>
+						
+					</div>
+					<div class="addBtn">
+						<button id="followBtn" >Custom</button>
+						<button id="followBtn" >Custom</button>
+					</div>
+
+				</div>
+				<div>
+					<audio id="sfx1" class="d-block">
+						<source src="assets/lang/en/sounds/printer_comment.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx2" class="d-block">
+						<source src="assets/lang/en/sounds/printer_gift.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx3" class="d-block">
+						<source src="assets/lang/en/sounds/printer_winner.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx4" class="d-block">
+						<source src="assets/lang/en/sounds/yey.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx5" class="d-block">
+						<source src="assets/lang/en/sounds/tygSound.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx6" class="d-block">
+						<source src="assets/lang/en/sounds/tapSound.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx7" class="d-block">
+						<source src="assets/lang/en/sounds/followSound.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx8" class="d-block">
+						<source src="assets/lang/en/sounds/mp.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx9" class="d-block">
+						<source src="assets/lang/en/sounds/music.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx10" class="d-block">
+						<source src="assets/lang/en/sounds/pokame.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx11" class="d-block">
+						<source src="assets/lang/en/sounds/star.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx12" class="d-block">
+						<source src="assets/lang/en/sounds/rick.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx13" class="d-block">
+						<source src="assets/lang/en/sounds/succes3.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx14" class="d-block">
+						<source src="assets/lang/en/sounds/elzoo.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx15" class="d-block">
+						<source src="assets/lang/en/sounds/wow.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="tts" class="d-block"></audio>
+				</div>
+
+			</div>
+			<div id="controlPanel" class="wrapper">
+				<div class="container">
+					<video id="change" class="background" autoplay muted loop>
+						<source src="assets/media/bg1.mp4" type="video/mp4">
+					</video>
+					<div class="printer">
+						<table class="table">
+							<tr>
+								<td id="paperContainer" >
+									<div id="paperPerspective" class="paperPerspective" >
+										<div id="paper" class="paper" style="font-size:12px; ">
+											<div style="width:100%;padding-top:100%;text-align:center;"><button id="btnPrepare" style="font-size:130%;">▶ START MP</button></div>
+											<input style="width:95%;text-align:center;" id="targetUsername2" type="text" placeholder="Enter @username" />
+										</div>
+									
+									</div>
+									<div id="paperPerspective_fade" class="paperPerspective_fade" ></div>
+								</td>
+							</tr>
+							<tr class="bottom-container">
+								<td class="bottom-wrapper">
+									<div class="bottom-bar">
+										<table id="textBottom" class="table" style="height:100%;font-size:16px;">
+											<tr>
+												<td colspan="2" style="padding:0% 2%;vertical-align:middle;">
+													<div> <marquee id="uiText3" bgcolor="#edd78c" style="border-radius: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size:80%; color:#660e22;">❤️ ------ Link saweria ada dibio buat jajan ------ ❤️ ------ Jangan lupa follow tiktok : statusngapak_ ------ ❤️</marquee></div>
+												</td>
+											</tr>
+											<tr>
+												<td rowspan="3" style="width:35%;text-align:center;vertical-align:middle;padding-left:0%;padding-right:0%;padding-top:2%;padding-bottom:1%;font-size:80%;">
+													<div id="uiText0" style="font-size:80%;padding-bottom:3%;padding-left:0%;">    👑👑👑</div>
+													<div style="padding-bottom:3%;">
+														<img id="winnerAvatar" src="assets/lang/en/media/profile.jpg" style="width:32px;height:32px;border-radius:50%;"/>
+													</div>
+													<div id="textWinner" class="text-winner" >***</div>
+												</td>
+												<td style="vertical-align:middle;padding-left:1%;padding-right:3%;padding-top:2%;padding-bottom:0%;">
+													<div id="textGuess" class="text-guess blink">
+														<div style='font-size:70%;padding-bottom:1%;'>***</div>
+														<div>***</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2" style="padding:1% 0%;vertical-align:middle;">
+													<div class="text-caption" id="uiText1">⬆ GUESS WORD ABOVE ⬆</div>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2" style="padding:1% ;vertical-align:middle;">
+													<div class="text-caption" id="uiText2">🎁 GIFT = PRINT UR PHOTO</div>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2" style="padding:0% 2%;vertical-align:middle;">
+													<div>&nbsp;</div>
+												</td>
+											</tr>
+
+										</table>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="glareAnimation" class="animation" style="display:none;"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		
+		function changevid(buttonlink) { 
+    		document.getElementById('change').src = buttonlink;
+		}
+    
+	</script>
+	
+</html>
