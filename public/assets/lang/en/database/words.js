@@ -62,7 +62,7 @@ clue: animal|Egret
 clue: animal|Elephant
 clue: animal|Elk
 clue: animal|Falcon
-clue: animal|Fish
+clue: animal|Fishor
 clue: animal|Flamingo
 clue: animal|Fly
 clue: animal|Flying ant
@@ -114,6 +114,40 @@ clue: animal|Nightingale
 clue: animal|Octopus
 clue: animal|Orangutan
 clue: animal|Ostrich
-
+clue: kota|Purwokerto
+clue: kota|Yogyakarta
+clue: kota|Surabaya
+clue: kota|Sidoarjo
+clue: kota|Solo
+clue: kota|Semarang
+clue: kota|Jakarta
+clue: kota|Jember
+clue: kota|Jombang
+clue: kota|Kediri
+clue: kota|Klaten
+clue: kota|Kudus
+clue: kota|Kendal
+clue: kota|Tangerang
+clue: kota|Tulungagung
+clue: kota|Malang
+clue: kota|Madiun
+clue: kota|Magetan
+clue: kota|Mojokerto
+clue: kota|Makassar
+clue: kota|Banyumas
+clue: kota|Bojonegoro
+clue : kota|Bekasi
+clue: kota|Bogor
+clue: kota|Blitar
+clue: kota|Purbalingga
+clue: kota|Pasuruan
+clue: kota|Brebes
+clue: kota|Cilacap
+clue: kota|Cirebon
+clue: kota|Demak
+clue: kota|Gresik
+clue: kota|Jember
+clue: kota|Jombang
+clue: kota|Bogor
 
 `;
