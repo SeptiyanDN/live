@@ -1741,7 +1741,7 @@ var intervalWelcome = setInterval(function() {
    
     addContent(
 
-      "<div><img src='assets/lang/en/media/mp.png' style='width:100%;border-radius: 10px;'></div>"
+      "<div><img src='assets/lang/id/media/mp.png' style='width:100%;border-radius: 10px;'></div>"
   
     )
   }
